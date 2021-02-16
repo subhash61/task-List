@@ -13,6 +13,7 @@ router.route("/").post(taskController.createTask);
 
 router
   .route("/:taskid")
+  .get(taskController.getAllTask)
   .patch(taskController.editTask)
   .delete(taskController.deleteTask);
 

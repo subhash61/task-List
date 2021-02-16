@@ -54,7 +54,7 @@ exports.editTask = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteTask = catchAsync(async (req, res, next) => {
-  const task = await Task.findByIdAndDelete(req.params.id);
+  const task = await Task.findByIdAndDelete(req.params.taskid);
 
   if (!task) {
     return next(new AppError("No task found with that ID", 404));
