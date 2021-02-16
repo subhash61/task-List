@@ -7,11 +7,12 @@ const router = express.Router();
 
 router.use(authController.protect);
 
+router.route("/").get(taskController.getAllTask);
+
 router.route("/").post(taskController.createTask);
 
 router
   .route("/:taskid")
-  .get(taskController.getAllTask)
   .patch(taskController.editTask)
   .delete(taskController.deleteTask);
 
