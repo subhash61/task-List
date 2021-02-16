@@ -16,7 +16,7 @@ exports.createTask = catchAsync(async (req, res, next) => {
 
 exports.getAllTask = catchAsync(async (req, res, next) => {
   let filter = {};
-  if (req.params.tourId) filter = { tour: req.params.tourId };
+  if (req.params.taskid) filter = { _id: req.params.taskid };
 
   const features = new APIFeatures(Task.find(filter), req.query)
     .filter()

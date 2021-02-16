@@ -13,7 +13,7 @@ const taskSchema = new mongoose.Schema({
   endTime: {
     type: Date,
   },
-  status: {
+  statusName: {
     type: String,
     default: "scheduled",
     enum: ["scheduled", "running", "expired"],
