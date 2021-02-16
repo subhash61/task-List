@@ -1,6 +1,7 @@
 const Task = require("../models/taskModel");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
+const APIFeatures = require("../utils/apiFeatures");
 
 exports.createTask = catchAsync(async (req, res, next) => {
   const task = await Task.create(req.body);
@@ -13,8 +14,18 @@ exports.createTask = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getTask = catchAsync(async (req, res, next) => {
-  const task = await Task.findById(req.params.taskid);
+exports.getAllTask = catchAsync(async (req, res, next) => {
+  let filter = {};
+  if (req.params.tourId) filter = { tour: req.params.tourId };
+
+  const features = new APIFeatures(Task.find(filter), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .pagination();
+
+  const task = await features.query;
+
   if (!task) {
     return next(new AppError("No task with that id", 404));
   }
